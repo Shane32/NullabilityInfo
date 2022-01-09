@@ -160,6 +160,38 @@ namespace NullableTests
         public static Tuple<T, string?> Field10() => null!;
     }
 
+    public class Parent1<H, I>
+        where H: notnull
+    {
+        public class Complex1<A, B, C, D, E, F, G>
+            where A : NullableClass18<string?>
+            where B : NullableClass18<string?>
+            where C : NullableClass18<string>?
+            where D : NullableClass18<string?>?
+            where E : notnull
+            where F : struct
+        {
+            public static Tuple<Tuple<string, string?>, A> Field1A() => default!;
+            public static Tuple<Tuple<string, string?>, B> Field1B() => default!;
+            public static Tuple<Tuple<string, string?>, C> Field1C() => default!;
+            public static Tuple<Tuple<string, string?>, D> Field1D() => default!;
+            public static Tuple<Tuple<string, string?>, E> Field1E() => default!;
+            public static Tuple<Tuple<string, string?>, F> Field1F() => default!;
+            public static Tuple<Tuple<string, string?>, G> Field1G() => default!;
+            public static Tuple<Tuple<string, string?>, H> Field1H() => default!;
+            public static Tuple<Tuple<string, string?>, I> Field1I() => default!;
+            public static Tuple<Tuple<string, string?>, A?> Field2A() => default!;
+            public static Tuple<Tuple<string, string?>, B?> Field2B() => default!;
+            public static Tuple<Tuple<string, string?>, C?> Field2C() => default!;
+            public static Tuple<Tuple<string, string?>, D?> Field2D() => default!;
+            public static Tuple<Tuple<string, string?>, E?> Field2E() => default!;
+            public static Tuple<Tuple<string, string?>, F?> Field2F() => default!;
+            public static Tuple<Tuple<string, string?>, G?> Field2G() => default!;
+            public static Tuple<Tuple<string, string?>, H?> Field2H() => default!;
+            public static Tuple<Tuple<string, string?>, I?> Field2I() => default!;
+        }
+    }
+
     public struct TestStruct<T>
     {
         public T Value;

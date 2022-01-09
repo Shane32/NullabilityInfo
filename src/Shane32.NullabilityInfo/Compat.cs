@@ -51,17 +51,15 @@ namespace Shane32.NullabilityInfo
 
             void RecursiveLoop(NullabilityInfo info)
             {
-                if (info.Type.IsGenericType) {
-                    if (info.Type.GetGenericTypeDefinition() == typeof(Nullable<>)) {
-                        list.Add((info.Type.GetGenericArguments()[0], Nullability.Nullable));
-                    } else {
-                        list.Add((info.Type, Convert(info.ReadState)));
-                    }
+                var type = Nullable.GetUnderlyingType(info.Type) ?? info.Type;
+                list.Add((type, Convert(info.ReadState)));
+                if (info.Type.IsArray) {
+                    RecursiveLoop(info.ElementType!);
+                }
+                else if (type.IsGenericType) {
                     foreach (var t in info.GenericTypeArguments) {
                         RecursiveLoop(t);
                     }
-                } else {
-                    list.Add((info.Type, Convert(info.ReadState)));
                 }
             }
 

@@ -151,8 +151,41 @@ namespace NullableTests
         public void Method_GetNullability_Class18(string methodName, List<(Type, Nullability)> expected)
         {
             var method = typeof(NullableClass18<>).GetMethod(methodName).ShouldNotBeNull();
+            if (methodName == "Field10")
+            {
+
+            }
             var actual = method.ReturnParameter.GetNullabilityInformation().ToList();
             actual.ShouldBe(expected);
+        }
+
+        [Theory]
+        [InlineData("Field1A", NullabilityState.NotNull)]
+        [InlineData("Field1B", NullabilityState.NotNull)]
+        [InlineData("Field1C", NullabilityState.NotNull)]
+        [InlineData("Field1D", NullabilityState.NotNull)]
+        [InlineData("Field1E", NullabilityState.NotNull)]
+        [InlineData("Field1F", NullabilityState.NotNull)]
+        [InlineData("Field1G", NullabilityState.NotNull)]
+        [InlineData("Field1H", NullabilityState.NotNull)]
+        [InlineData("Field1I", NullabilityState.NotNull)]
+        [InlineData("Field2A", NullabilityState.NotNull)]
+        [InlineData("Field2B", NullabilityState.NotNull)]
+        [InlineData("Field2C", NullabilityState.NotNull)]
+        [InlineData("Field2D", NullabilityState.NotNull)]
+        [InlineData("Field2E", NullabilityState.NotNull)]
+        [InlineData("Field2F", NullabilityState.NotNull)]
+        [InlineData("Field2G", NullabilityState.NotNull)]
+        [InlineData("Field2H", NullabilityState.NotNull)]
+        [InlineData("Field2I", NullabilityState.NotNull)]
+        public void Test_OpenGeneric(string fieldName, NullabilityState state)
+        {
+            var t = typeof(Parent1<,>.Complex1<,,,,,,>);
+            var method = t.GetMethod(fieldName).ShouldNotBeNull();
+            var context = new NullabilityInfoContext();
+            var info = context.Create(method.ReturnParameter);
+            var info2 = info.GenericTypeArguments[1];
+            info2.ReadState.ShouldBe(state);
         }
     }
 }
