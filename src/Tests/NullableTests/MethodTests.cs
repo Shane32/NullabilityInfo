@@ -161,26 +161,31 @@ namespace NullableTests
 
         [Theory]
         [InlineData("Field1A", NullabilityState.NotNull)]
-        [InlineData("Field1B", NullabilityState.NotNull)]
-        [InlineData("Field1C", NullabilityState.NotNull)]
+        [InlineData("Field1B", NullabilityState.Unknown)]
+        [InlineData("Field1C", NullabilityState.Unknown)]
         [InlineData("Field1D", NullabilityState.NotNull)]
-        [InlineData("Field1E", NullabilityState.NotNull)]
-        [InlineData("Field1F", NullabilityState.NotNull)]
+        [InlineData("Field1E", NullabilityState.Unknown)]
+        [InlineData("Field1F", NullabilityState.Unknown)]
         [InlineData("Field1G", NullabilityState.NotNull)]
         [InlineData("Field1H", NullabilityState.NotNull)]
-        [InlineData("Field1I", NullabilityState.NotNull)]
-        [InlineData("Field2A", NullabilityState.NotNull)]
-        [InlineData("Field2B", NullabilityState.NotNull)]
-        [InlineData("Field2C", NullabilityState.NotNull)]
-        [InlineData("Field2D", NullabilityState.NotNull)]
-        [InlineData("Field2E", NullabilityState.NotNull)]
-        [InlineData("Field2F", NullabilityState.NotNull)]
-        [InlineData("Field2G", NullabilityState.NotNull)]
-        [InlineData("Field2H", NullabilityState.NotNull)]
-        [InlineData("Field2I", NullabilityState.NotNull)]
+        [InlineData("Field1I", NullabilityState.Unknown)]
+        [InlineData("Field1J", NullabilityState.Unknown)]
+        [InlineData("Field1K", NullabilityState.Unknown)]
+        [InlineData("Field1L", NullabilityState.Unknown)]
+        [InlineData("Field1M", NullabilityState.NotNull)]
+        [InlineData("Field1N", NullabilityState.Unknown)]
+        [InlineData("Field2A", NullabilityState.Nullable)]
+        [InlineData("Field2B", NullabilityState.Nullable)]
+        [InlineData("Field2C", NullabilityState.Nullable)]
+        [InlineData("Field2D", NullabilityState.Nullable)]
+        [InlineData("Field2E", NullabilityState.Nullable)]
+        [InlineData("Field2F", NullabilityState.Nullable)]
+        [InlineData("Field2G", NullabilityState.Nullable)]
+        [InlineData("Field2H", NullabilityState.Nullable)]
+        [InlineData("Field2I", NullabilityState.Nullable)]
         public void Test_OpenGeneric(string fieldName, NullabilityState state)
         {
-            var t = typeof(Parent1<,>.Complex1<,,,,,,>);
+            var t = typeof(Parent1<,>.Complex1<,,,,,,,,,,,>);
             var method = t.GetMethod(fieldName).ShouldNotBeNull();
             var context = new NullabilityInfoContext();
             var info = context.Create(method.ReturnParameter);

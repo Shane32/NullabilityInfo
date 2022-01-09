@@ -160,16 +160,42 @@ namespace NullableTests
         public static Tuple<T, string?> Field10() => null!;
     }
 
-    public class Parent1<H, I>
-        where H: notnull
+    public class Class1 { }
+
+    public class Parent1<M, N>
+        where M: notnull
+        //N = unknown
     {
-        public class Complex1<A, B, C, D, E, F, G>
-            where A : NullableClass18<string?>
-            where B : NullableClass18<string?>
-            where C : NullableClass18<string>?
-            where D : NullableClass18<string?>?
-            where E : notnull
-            where F : struct
+        public class Complex2 : Complex1<
+            NullableClass18<string>, //non-null
+            NullableClass18<string>, //non-null
+            NullableClass18<string>?, //nullable
+            Class1, //non-null
+            Class1, //non-null
+            Class1?, //nullable
+            Tuple<int, int>, //non-null
+            Guid, //non-null
+            string, //non-null
+            string?, //nullable
+            M, //non-null
+            N> //unknown
+        {
+
+        }
+
+        public class Complex1<A, B, C, D, E, F, G, H, I, J, K, L>
+            where A : NullableClass18<string> //non-null
+            where B : NullableClass18<string>? //unknown
+            where C : NullableClass18<string>? //unknown
+            where D : class //non-null
+            where E : class? //unknown
+            where F : class? //unknown
+            where G : notnull //non-null
+            where H : struct //non-null
+            //I = unknown
+            //J = unknown
+            //K = unknown
+            //L = unknown
         {
             public static Tuple<Tuple<string, string?>, A> Field1A() => default!;
             public static Tuple<Tuple<string, string?>, B> Field1B() => default!;
@@ -180,6 +206,11 @@ namespace NullableTests
             public static Tuple<Tuple<string, string?>, G> Field1G() => default!;
             public static Tuple<Tuple<string, string?>, H> Field1H() => default!;
             public static Tuple<Tuple<string, string?>, I> Field1I() => default!;
+            public static Tuple<Tuple<string, string?>, J> Field1J() => default!;
+            public static Tuple<Tuple<string, string?>, K> Field1K() => default!;
+            public static Tuple<Tuple<string, string?>, L> Field1L() => default!;
+            public static Tuple<Tuple<string, string?>, M> Field1M() => default!;
+            public static Tuple<Tuple<string, string?>, N> Field1N() => default!;
             public static Tuple<Tuple<string, string?>, A?> Field2A() => default!;
             public static Tuple<Tuple<string, string?>, B?> Field2B() => default!;
             public static Tuple<Tuple<string, string?>, C?> Field2C() => default!;
@@ -189,6 +220,11 @@ namespace NullableTests
             public static Tuple<Tuple<string, string?>, G?> Field2G() => default!;
             public static Tuple<Tuple<string, string?>, H?> Field2H() => default!;
             public static Tuple<Tuple<string, string?>, I?> Field2I() => default!;
+            public static Tuple<Tuple<string, string?>, J?> Field2J() => default!;
+            public static Tuple<Tuple<string, string?>, K?> Field2K() => default!;
+            public static Tuple<Tuple<string, string?>, L?> Field2L() => default!;
+            public static Tuple<Tuple<string, string?>, M?> Field2M() => default!;
+            public static Tuple<Tuple<string, string?>, N?> Field2N() => default!;
         }
     }
 
